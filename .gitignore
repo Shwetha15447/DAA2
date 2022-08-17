@@ -1,23 +1,73 @@
-# Compiled class file
-*.class
+import java.util.*; 
 
-# Log file
-*.log
+import java.util.Scanner;
+  
 
-# BlueJ files
-*.ctxt
+public class Main { 
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+    public static int interpolationSearch(int arr[], int lo, int hi, int x) 
 
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
+    { 
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+       int pos; 
+
+        if (lo <= hi && x >= arr[lo] && x <= arr[hi]) 
+        { 
+        
+        pos = lo+ (((hi - lo) / (arr[hi] - arr[lo])) * (x - arr[lo])); 
+
+        if (arr[pos] == x) 
+
+                return pos; 
+
+         if (arr[pos] < x) 
+
+                return interpolationSearch(arr, pos + 1, hi, x); 
+
+
+        if (arr[pos] > x) 
+
+                return interpolationSearch(arr, lo, pos - 1,  x); 
+
+        } 
+
+        return -1; 
+
+    } 
+
+    public static void main(String[] args) 
+
+    { 
+
+  
+        Scanner sc=new Scanner(System.in);
+        
+        System.out.println("Enter the number of array elements ");
+        
+        int n=sc.nextInt();
+        
+        int [] arr=new int[n];
+        
+        System.out.println("Enter the sorted array ");
+        
+        for(int i=0;i<n;i++)
+        {
+            arr[i]=sc.nextInt();
+        }
+
+       System.out.println("Enter the elements to be searched ");
+       
+       int x=sc.nextInt();
+
+        int index = interpolationSearch(arr, 0, n - 1, x); 
+
+         if (index != -1) 
+
+            System.out.println("Element found at index "+ index); 
+
+        else
+
+            System.out.println("Element not found."); 
+
+    } 
+} 
